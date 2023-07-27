@@ -1,0 +1,97 @@
+﻿@model IEnumerable<DataLayer.Models.FoodCategory>
+
+@{
+    ViewBag.Title = "Menu";
+}
+
+<h2>Menu</h2>
+@using (Html.BeginForm())
+{
+    <label>phone</label>
+    <input type="text" name="PhoneNumber" style="margin: 7px" />
+    <br />
+    <label style="text-align:center">address</label><textarea name="Address" style="width:400px;margin:7px">
+
+    </textarea>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                foods
+            </th>
+        </tr>
+
+        @foreach (var item in Model.ToList())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @foreach (var food in item.Foods.ToList())
+                    {
+                        @Html.Action("ShowFood", new { id = food.FoodID })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+    <div>
+        <label>Real Price:</label>
+        <span id="price1">0</span><br />
+
+        <label>Offer Code:</label>
+        <input type="text" id="offer" name="offerCode" onchange="UpdateRealPrice()"/><br />
+
+        <label>Final Price</label>
+        <span id="price2">0</span>
+    </div>
+    <br />
+    <input type="submit" class="btn btn-success" value="submit order" />
+}
+
+
+<script>
+
+    function UpdateRealPrice() {
+        var price1 = 0;
+        var inputs = document.querySelectorAll('input[data-price]');
+
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            var price = parseInt(input.dataset.price);
+            var amount = parseInt(input.value);
+
+            price1 += price * amount;
+        }
+
+        document.getElementById('price1').innerHTML = price1;
+        var offerCode = $("#offer").val();
+var price = $("#price1").text();
+
+$.ajax({
+    type: "POST",
+    url: '@Url.Action("finalPrice")',
+    data: { offerCode: offerCode, currentPrice: price },
+    success: function (result) {
+        $("#price2").text(result.finalPrice);
+    },
+    error: function () {
+        alert("error");
+    }
+});
+
+
+    }
+
+
+
+
+</script>
+

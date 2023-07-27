@@ -1,0 +1,64 @@
+﻿@model DataLayer.Models.Offer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Offer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferPercent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsOptional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsOptional)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

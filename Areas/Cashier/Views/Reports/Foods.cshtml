@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DataLayer.Models.Food>
+
+@{
+    int sum1 = 0;
+    int sum2 = 0;
+    int sum3 = 0;
+}
+
+<table class="table" id="main">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            total orders
+        </th>
+        <th>
+            total amount
+        </th>
+        <th>
+            total cash
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @item.MiniOrders.Count
+            </td>
+            <td>
+                @item.MiniOrders.Sum(mo => mo.quantity)
+            </td>
+            <td>
+                @item.MiniOrders.Sum(mo => mo.quantity * mo.Food.Price)
+            </td>
+        </tr>
+        sum1 += item.MiniOrders.Count;
+        sum2 += item.MiniOrders.Sum(mo => mo.quantity);
+        sum3 += item.MiniOrders.Sum(mo => mo.quantity * mo.Food.Price);
+    }
+    <tr>
+        <td>
+            <h4>total</h4>
+        </td>
+        <td>
+            <h4>@sum1</h4>
+        </td>
+        <td>
+            <h4>@sum2</h4>
+        </td>
+        <td>
+            <h4>@sum3</h4>
+        </td>
+    </tr>
+
+</table>
+
+<a href="@Url.Action("GetPdfFoods")" class="btn btn-warning">Convert to PDF</a>
+
+
+<br />
+<a href="@Url.Action("Index")">Main Menu</a>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DataLayer.Models.Offer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferPercent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OfferDiscount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsOptional)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfferTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfferCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfferPercent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfferDiscount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOptional)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.OfferID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.OfferID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OfferID })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<a href="@Url.Action("Panel","Admin")">Main Menu</a>

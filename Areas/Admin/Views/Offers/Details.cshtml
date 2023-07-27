@@ -1,0 +1,58 @@
+﻿@model DataLayer.Models.Offer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Offer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferPercent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OfferDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OfferDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsOptional)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsOptional)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.OfferID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

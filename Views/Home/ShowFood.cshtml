@@ -1,0 +1,21 @@
+﻿@model DataLayer.Models.Food
+<table>
+    <tr>
+        <td style="padding:4px" >
+            <input type="number" name="Amounts" value="0" max="@Model.Amount" min="0" style="width:60px" onchange="UpdateRealPrice()" data-price="@Model.Price"/>
+            <input type="hidden" name="FoodIDs" value="@Model.FoodID" />
+
+        </td>
+
+        <td style="padding:4px">
+            <img src="/FoodImages/@Model.Image" class="thumbnail" style="max-width:120px" />
+        </td>
+        <td style="padding:4px">
+            <h5 style="padding:4px">Name:@Html.DisplayFor(modelItem => modelItem.Name)</h5>
+            <h5 style="padding:4px">Amount:@Html.DisplayFor(modelItem => modelItem.Amount)</h5>
+            <h5 style="padding:4px">Price:@Html.DisplayFor(modelItem => modelItem.Price)</h5>
+        </td>
+
+
+    </tr>
+</table>

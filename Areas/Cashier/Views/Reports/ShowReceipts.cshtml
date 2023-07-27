@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DataLayer.Models.Receipt>
+
+@{
+    int sum1 = 0;
+    int sum2 = 0;
+}
+
+
+<table class="table" id="main">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirunBar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Confirm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+        <th>
+            Updated Price
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirunBar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Confirm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @{
+                    int sum = 0;
+                    foreach (var sub in item.MiniOrders.ToList())
+                    {
+                        sum += sub.quantity * sub.Food.Price;
+                    }
+                    sum1 += item.TotalPrice;
+                    sum2 += sum;
+                }
+                @sum
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ReceiptID }, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+    }
+
+    <tr>
+        <td>
+            <h4>total</h4>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <h4>@sum1</h4>
+        </td>
+        <td>
+            <h4>@sum2</h4>
+        </td>
+        <td></td>
+    </tr>
+
+</table>
+<a href="@Url.Action("GetPdfReceipts")" class="btn btn-warning">Convert to PDF</a>
+
+
+<br />
+<a href="@Url.Action("Index")">Main Menu</a>

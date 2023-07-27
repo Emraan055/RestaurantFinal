@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DataLayer.Models.FoodCategory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Category", "Create")
+</p>
+
+<p>
+    @Html.ActionLink("Create New Food","Create","Foods")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FoodCategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FoodCategoryID }) |
+            </td>
+            <td>
+                @Html.Action("FoodsListByCategory", "Foods", new { id = item.FoodCategoryID })
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+
+<br />
+<a href="@Url.Action("Panel","Admin")">Main Menu</a>
